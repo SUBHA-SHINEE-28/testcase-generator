@@ -16,7 +16,7 @@ function App() {
 
   const formSubmit = async () => {
     try {
-      const res = await axios.post(`http://localhost:5000/files`, {
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/files`, {
         owner,
         repo
       });
@@ -36,7 +36,7 @@ function App() {
 
   const handleGenerateSummary = async () => {
     try {
-      const res = await axios.post(`http://localhost:5000/generate-summary`, {
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/generate-summary`, {
         files: selectedFiles,
         owner,
         repo
@@ -57,7 +57,7 @@ function App() {
 
   const handleGenerateCode = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/generate-code', { summary: selectedSummary });
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/generate-code`, { summary: selectedSummary });
       setGeneratedCode(res.data.generatedCode);
       setShowCode(true);
     }
@@ -68,19 +68,19 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '25px', fontFamily: 'sans-serif',color: "white" }}>
+    <div style={{ padding: '25px', fontFamily: 'sans-serif', color: "white" }}>
       <center>   <h1 style={{ color: "white" }}>Test Case Generator</h1>      </center>
 
-      <div class="row">
-        <div class="col">
+      <div className="row">
+        <div className="col">
           <input type="text"
-            class="form-control"
+            className="form-control"
             value={owner}
             placeholder="Owner name"
             onChange={(e) => setOwner(e.target.value)}
             aria-label="First name" />
         </div>
-        <div class="col">
+        <div className="col">
           <input type="text"
             className="form-control"
             placeholder="Repo name"
