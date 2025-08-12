@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
 app.post('/files', async (req, res) => {
     try {
         const { owner, repo } = req.body;
-        const path = '';
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+        // const path = '';
+        const url = `https://api.github.com/repos/${owner}/${repo}/contents`;
 
         const response = await axios.get(url, {
             headers: {
