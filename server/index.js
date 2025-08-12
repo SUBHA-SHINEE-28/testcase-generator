@@ -7,10 +7,15 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 
 const token = process.env.GITHUB_TOKEN;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.get('/', (req, res) => {
     res.send(`<h2 style ="color : red"> Server is running</h2>`);
